@@ -25,13 +25,12 @@ const takePhoto = async () => {
     const originalUri = result.assets[0].uri;
 
     // Resize and compress the image
-    const manipulatedImage = await ImageManipulator.manipulateAsync(
+  const manipulatedImage = await ImageManipulator.manipulateAsync(
   originalUri,
-  [
-    { resize: { width: 700 } }
-  ],
-  { compress: 0.6, format: ImageManipulator.SaveFormat.JPEG }
+  [{ resize: { width: 700 } }],
+  { compress: 0.8, format: ImageManipulator.SaveFormat.JPEG, base64: false }
 );
+
 
 
     setImage(manipulatedImage.uri);
@@ -44,7 +43,9 @@ const takePhoto = async () => {
     setLoading(true);
 
     const formData = new FormData();
-    formData.append('apikey', 'helloworld'); // Free demo key
+    formData.append('apikey', 'helloworld');
+    formData.append('OCREngine', '2');
+ // Free demo key
     formData.append('language', 'eng');
     formData.append('isOverlayRequired', 'false');
     formData.append('file', {
@@ -118,3 +119,5 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+
+// API KEY = AIzaSyDIOB8G9a1UMJqcWzp6ZdcMwy5Ek__kI1c
